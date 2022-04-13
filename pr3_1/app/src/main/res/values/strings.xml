@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">pr3_1</string>
+    <string name="but1">Сообщить диапазон</string>
+    <string name="but_smaller">Меньше</string>
+    <string name="but_bigger">Больше</string>
+</resources>
