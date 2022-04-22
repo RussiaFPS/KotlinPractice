@@ -1,12 +1,37 @@
 [
   {
   "name": "Molecule Man",
-  "sex": "m",
-  "phoneNumber": "7965665446"
+  "sex": "Mr",
+  "phoneNumber": "77309176590"
   },
   {
     "name": "Eternal Flame",
-    "sex": "Unknown",
-    "phoneNumber": "78686755"
+    "sex": "Mr",
+    "phoneNumber": "72076320465"
+  },
+  {
+    "name": "Santiago Smith",
+    "sex": "Mrs",
+    "phoneNumber": "74520847855"
+  },
+  {
+    "name": "Costas Halina",
+    "sex": "Mr",
+    "phoneNumber": "78203302122"
+  },
+  {
+    "name": "Barna Ananth",
+    "sex": "Mrs",
+    "phoneNumber": "71505965818 "
+  },
+  {
+    "name": "Kevin Boban",
+    "sex": "Mr",
+    "phoneNumber": "76894934032"
+  },
+  {
+    "name": "Lileas Helmi",
+    "sex": "Mrs",
+    "phoneNumber": "71072338923"
   }
 ]
