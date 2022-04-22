@@ -3,6 +3,7 @@ package ru.mirea.pr3_3
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -19,6 +20,13 @@ class CustomAdapter(private val mList: List<Person>) : RecyclerView.Adapter<Cust
         val ItemsViewModel = mList[position]
         holder.textViewName.text = ItemsViewModel.name
         holder.textViewPhoneNumber.text = ItemsViewModel.phoneNumber
+        if (ItemsViewModel.sex=="Mr"){
+            holder.imageViewSex.setImageResource(R.drawable.man)
+        }else if(ItemsViewModel.sex=="Mrs"){
+            holder.imageViewSex.setImageResource(R.drawable.women)
+        }else{
+            holder.imageViewSex.setImageResource(R.drawable.notinfo)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -28,5 +36,6 @@ class CustomAdapter(private val mList: List<Person>) : RecyclerView.Adapter<Cust
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         val textViewName: TextView = itemView.findViewById(R.id.name)
         val textViewPhoneNumber: TextView = itemView.findViewById(R.id.phoneNumber)
+        val imageViewSex: ImageView = itemView.findViewById(R.id.sex)
     }
 }
