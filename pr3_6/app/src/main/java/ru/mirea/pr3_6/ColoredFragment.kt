@@ -1,6 +1,7 @@
 package ru.mirea.pr3_6
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,6 @@ class ColoredFragment() : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_colored, container, false)
         val textView:TextView = view.findViewById(R.id.color)
 
@@ -32,15 +32,9 @@ class ColoredFragment() : Fragment() {
         return view
     }
 
-
     companion object {
         @JvmStatic
         fun newInstance() =
             ColoredFragment().apply {}
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putInt("id", index)
     }
 }

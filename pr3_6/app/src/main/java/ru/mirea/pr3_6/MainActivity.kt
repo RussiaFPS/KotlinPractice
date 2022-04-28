@@ -1,6 +1,7 @@
 package ru.mirea.pr3_6
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 
 
