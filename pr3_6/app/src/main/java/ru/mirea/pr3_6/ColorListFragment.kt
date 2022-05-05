@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 
 
 class   ColorListFragment : Fragment() {
@@ -24,22 +23,15 @@ class   ColorListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_color_list, container, false)
         val listView = view.findViewById<ListView>(R.id.listView)
         val colorNames = resources.getStringArray(R.array.colorNames)
+        val colorValues = resources.getIntArray(R.array.colorValues)
 
         val adapter =
             ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, colorNames)
         listView.adapter = adapter
 
-        if (savedInstanceState?.getInt("status")!=null){
-            index = savedInstanceState.getInt("status")
-            val bundle = Bundle()
-            bundle.putInt("id",index)
-            val fragment = ColoredFragment()
-            fragment.arguments = bundle
-            fragmentManager?.beginTransaction()?.replace(R.id.fragment2,fragment)?.commit()
-        }
-
         listView.setOnItemClickListener { adapterView, view, i, l ->
             index = i
+            view.setBackgroundColor(colorValues[i])
             val bundle = Bundle()
             bundle.putInt("id",index)
             val fragment = ColoredFragment()
@@ -54,10 +46,5 @@ class   ColorListFragment : Fragment() {
         @JvmStatic
         fun newInstance() =
             ColorListFragment().apply {}
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putInt("status", index)
     }
 }

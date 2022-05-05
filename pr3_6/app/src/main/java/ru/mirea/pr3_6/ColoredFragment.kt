@@ -24,7 +24,7 @@ class ColoredFragment() : Fragment() {
         val textView:TextView = view.findViewById(R.id.color)
 
         val args = this.arguments
-        index = args?.getInt("id")?: 0
+        index = args?.getInt("id")?: 130
 
         val colorValues = resources.getIntArray(R.array.colorValues)
         textView.setBackgroundColor(colorValues[index])

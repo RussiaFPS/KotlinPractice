@@ -16,7 +16,8 @@ class TestTimePickerDialog(val param1:Boolean, val param2:Boolean): DialogFragme
         val curMinute = c.get(Calendar.MINUTE);
         return TimePickerDialog(activity, {
                 _, hour, minute ->
-            TestFragment().setState(hour,minute,param1,param2)
+            //TestFragment().setState(hour,minute,param1,param2)
+            Log.d("TEST",hour.toString() + " " + minute.toString() + " " + param1.toString() + " " + param2.toString())
         }, curHour, curMinute, false)
     }
 }
