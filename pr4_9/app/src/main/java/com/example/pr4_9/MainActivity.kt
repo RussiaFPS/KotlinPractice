@@ -25,19 +25,29 @@ class MainActivity : AppCompatActivity() {
         }
 
         button1.setOnClickListener {
-            val data = Data.Builder()
-                .putInt("count", count)
-                .build()
-            val process1: OneTimeWorkRequest = OneTimeWorkRequest.Builder(TextWorker::class.java)
-                .build()
-            val process2: OneTimeWorkRequest = OneTimeWorkRequestBuilder<LongWorker>()
-                .setInputData(data)
-                .build()
-
-            WorkManager.getInstance(this)
-                .beginWith(process1)
-                .then(process2)
-                .enqueue()
+            if(count>0){
+                val data = Data.Builder()
+                    .putInt("count", count)
+                    .build()
+                val process1: OneTimeWorkRequest = OneTimeWorkRequest.Builder(TextWorker::class.java)
+                    .build()
+                val process2: OneTimeWorkRequest = OneTimeWorkRequestBuilder<LongWorker>()
+                    .setInputData(data)
+                    .build()
+                WorkManager.getInstance(this)
+                    .beginWith(process1)
+                    .then(process2)
+                    .enqueue()
+            }else{
+                val process1: OneTimeWorkRequest = OneTimeWorkRequest.Builder(TextWorker::class.java)
+                    .build()
+                val process2: OneTimeWorkRequest = OneTimeWorkRequestBuilder<LongWorker>()
+                    .build()
+                WorkManager.getInstance(this)
+                    .beginWith(process1)
+                    .then(process2)
+                    .enqueue()
+            }
         }
     }
 
