@@ -5,11 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.util.Log
+import android.widget.Button
 import androidx.work.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-    val count:Int = 0
+    var count:Int = 0
     val data = Data.Builder()
         .putInt("count", 0)
         .build()
@@ -23,7 +24,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val button:Button = findViewById(R.id.clicker)
+        button.setOnClickListener {
+            count++
+            button.text = count.toString()
+        }
+
         WorkManager.getInstance(this).enqueue(process1)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        WorkManager.getInstance().cancelAllWork()
     }
 }
 
