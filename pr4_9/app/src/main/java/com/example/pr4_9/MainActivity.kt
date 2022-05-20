@@ -14,8 +14,6 @@ class MainActivity : AppCompatActivity() {
     val data = Data.Builder()
         .putInt("count", 0)
         .build()
-    val process1: OneTimeWorkRequest = OneTimeWorkRequest.Builder(TextWorker::class.java)
-        .addTag("process1").build()
    /* val process2: OneTimeWorkRequest = OneTimeWorkRequestBuilder<LongWorker>()
         .setInputData(data)
         .build()*/
@@ -25,12 +23,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val button:Button = findViewById(R.id.clicker)
+        val button1:Button = findViewById(R.id.startprocess)
+
         button.setOnClickListener {
             count++
             button.text = count.toString()
         }
 
-        WorkManager.getInstance(this).enqueue(process1)
+        button1.setOnClickListener {
+            val process1: OneTimeWorkRequest = OneTimeWorkRequest.Builder(TextWorker::class.java)
+                .addTag("process1").build()
+            WorkManager.getInstance(this).enqueue(process1)
+        }
     }
 
     override fun onDestroy() {
