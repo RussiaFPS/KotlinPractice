@@ -11,12 +11,6 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
     var count:Int = 0
-    val data = Data.Builder()
-        .putInt("count", 0)
-        .build()
-   /* val process2: OneTimeWorkRequest = OneTimeWorkRequestBuilder<LongWorker>()
-        .setInputData(data)
-        .build()*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +25,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         button1.setOnClickListener {
+            val data = Data.Builder()
+                .putInt("count", count)
+                .build()
             val process1: OneTimeWorkRequest = OneTimeWorkRequest.Builder(TextWorker::class.java)
-                .addTag("process1").build()
-            WorkManager.getInstance(this).enqueue(process1)
+                .build()
+            val process2: OneTimeWorkRequest = OneTimeWorkRequestBuilder<LongWorker>()
+                .setInputData(data)
+                .build()
+
+            WorkManager.getInstance(this)
+                .beginWith(process1)
+                .then(process2)
+                .enqueue()
         }
     }
 

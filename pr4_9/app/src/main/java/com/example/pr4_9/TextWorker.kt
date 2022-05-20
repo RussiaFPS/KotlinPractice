@@ -8,14 +8,14 @@ import androidx.work.Worker
 import androidx.work.WorkerParameters
 
 class TextWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams)  {
-    val l:Char = 'r'
-    val j:Char = 'f'
-    val k:Char = 'i'
-    val p:Char = 'n'
-    val t:Char = 'e'
-    val m:Char = 'd'
-    val s:String = "friend"
-    var c:String = ""
+    private val l:Char = 'r'
+    private val j:Char = 'f'
+    private val k:Char = 'i'
+    private val p:Char = 'n'
+    private val t:Char = 'e'
+    private val m:Char = 'd'
+    private val s:String = "friend"
+    private var c:String = ""
 
     override fun doWork(): Result {
         Log.d("test_worker","text_worker_start")
@@ -41,17 +41,7 @@ class TextWorker(context: Context, workerParams: WorkerParameters) : Worker(cont
             }
         }
 
-        val d = Data.Builder()
-            .putString("data_is", c)
-            .build()
-
-        onStopped()
-        return Result.success(d)
-    }
-
-    override fun onStopped() {
-        super.onStopped()
-        WorkManager.getInstance().cancelAllWorkByTag("process1")
         Log.d("test_worker","text_worker_stop")
+        return Result.success(Data.Builder().putString("data_is",c).build())
     }
 }
