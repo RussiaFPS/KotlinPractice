@@ -82,6 +82,7 @@ class MainActivity : AppCompatActivity() {
                     items1.add(element.student.studentName)
                 }
                 isStudent=true
+                isSubject=false
                 change1()
             }
 
@@ -98,7 +99,9 @@ class MainActivity : AppCompatActivity() {
                 for(element in res){
                     items2.add(element.subject.subjectName)
                 }
+
                 isSubject=true
+                isStudent=false
                 change2()
             }
         }
@@ -116,6 +119,21 @@ class MainActivity : AppCompatActivity() {
                         for(element in res){
                             for((k) in element.subjects.withIndex()) {
                                 fin.add(element.subjects[k].subjectName)
+                            }
+                        }
+
+                        val adapter = CustomAdapter(fin)
+                        recyclerView.adapter = adapter
+                    }
+                }
+
+                if(isSubject){
+                    lifecycleScope.launch {
+                        val res = dao.getStudentsOfSubject(items2[id.toInt()])
+                        var fin:MutableList<String> =  arrayListOf()
+                        for(element in res){
+                            for((k) in element.students.withIndex()) {
+                                fin.add(element.students[k].studentName)
                             }
                         }
 
