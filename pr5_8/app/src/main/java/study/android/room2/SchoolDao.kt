@@ -41,6 +41,7 @@ interface SchoolDao {
     @Query("SELECT * FROM student")
     suspend fun getStudent(): List<StudentWithSubjects>
 
+
     @Transaction
     @Query("SELECT * FROM subject WHERE subjectName = :subjectName")
     suspend fun getStudentsOfSubject(subjectName: String): List<SubjectWithStudents>

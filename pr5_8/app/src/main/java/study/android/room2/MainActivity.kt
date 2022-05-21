@@ -8,6 +8,7 @@ import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Query
 import androidx.room.Room
@@ -42,10 +43,13 @@ class MainActivity : AppCompatActivity() {
         spinner = findViewById(R.id.spinner)
         listCaption = findViewById(R.id.listCaption)
         recyclerView = findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
 
         var items1:MutableList<String> =  arrayListOf()
         var items2:MutableList<String> =  arrayListOf()
+        var isStudent:Boolean = false
+        var isSubject:Boolean = false
 
         fun change1(){
             val adapter = ArrayAdapter(
@@ -77,6 +81,7 @@ class MainActivity : AppCompatActivity() {
                 for(element in res){
                     items1.add(element.student.studentName)
                 }
+                isStudent=true
                 change1()
             }
 
@@ -93,6 +98,7 @@ class MainActivity : AppCompatActivity() {
                 for(element in res){
                     items2.add(element.subject.subjectName)
                 }
+                isSubject=true
                 change2()
             }
         }
@@ -102,7 +108,21 @@ class MainActivity : AppCompatActivity() {
                 parent: AdapterView<*>, view: View?,
                 position: Int, id: Long
             ) {
-                Toast.makeText(getApplicationContext(), "При выборе должен меняться список на предметы выбранного ученика или учеников, изучающих выбранный предмет", Toast.LENGTH_LONG).show()
+                val dao = db.schoolDao
+                if(isStudent){
+                    lifecycleScope.launch {
+                        val res = dao.getSubjectsOfStudent(items1[id.toInt()])
+                        var fin:MutableList<String> =  arrayListOf()
+                        for(element in res){
+                            for((k) in element.subjects.withIndex()) {
+                                fin.add(element.subjects[k].subjectName)
+                            }
+                        }
+
+                        val adapter = CustomAdapter(fin)
+                        recyclerView.adapter = adapter
+                    }
+                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
