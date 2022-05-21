@@ -73,9 +73,9 @@ class MainActivity : AppCompatActivity() {
             val dao = db.schoolDao
             lifecycleScope.launch {
                 items1.clear()
-                val res = dao.getSchoolAndDirectorWithSchoolName()
+                val res = dao.getStudent()
                 for(element in res){
-                    items1.add(element.school.schoolName)
+                    items1.add(element.student.studentName)
                 }
                 change1()
             }
@@ -89,31 +89,13 @@ class MainActivity : AppCompatActivity() {
             val dao = db.schoolDao
             lifecycleScope.launch {
                 items2.clear()
-                val res = dao.getSchoolAndDirectorWithSchoolName()
+                val res = dao.getSubject()
                 for(element in res){
-                    items2.add(element.director.directorName)
+                    items2.add(element.subject.subjectName)
                 }
                 change2()
-
-                /*val res = dao.getSchoolAndDirectorWithSchoolName()
-                var text=""
-                for(element in res){
-                    text=text + element.director.directorName + "\n"
-                }
-
-                listCaption.text = text*/
             }
         }
-
-        //val items = arrayOf("Здесь", "должен", "располагаться", "список", "учеников", "или предметов")
-
-
-      /*  val adapter = ArrayAdapter(
-            this,
-            android.R.layout.simple_spinner_item, items
-        )
-
-        spinner.adapter = adapter*/
 
         spinner.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(
